@@ -277,9 +277,38 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .list-count { font-size: 12px; color: var(--text3); }
   .done-count { font-size: 12px; color: var(--green); }
+
+  .bulk-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .bulk-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all .15s;
+    font-family: var(--font);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .bulk-btn:hover {
+    background: var(--bg3);
+    border-color: var(--border2);
+    color: var(--text);
+  }
+  .bulk-btn svg { width: 12px; height: 12px; }
 
   .video-list { display: flex; flex-direction: column; gap: 4px; }
 
@@ -344,6 +373,27 @@
     white-space: nowrap;
     flex-shrink: 0;
   }
+  .vcopy {
+    width: 24px; height: 24px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background: transparent;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all .15s;
+    opacity: 0;
+  }
+  .vcard:hover .vcopy { opacity: 1; }
+  .vcopy:hover {
+    background: var(--bg3);
+    border-color: var(--border2);
+  }
+  .vcopy.copied {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+  }
+  .vcopy svg { width: 12px; height: 12px; }
 
   /* ── PANE ── */
   .pane { display: none; }
@@ -351,6 +401,30 @@
 
   /* ── SCROLLBAR FIREFOX ── */
   html { scrollbar-width: thin; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--bg3);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--green);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all .2s;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
 </style>
 </head>
 <body>
@@ -477,7 +551,16 @@
 
       <div class="list-header">
         <div class="section-title" style="margin-bottom:0;flex:1">91 ý tưởng video</div>
-        <div class="done-count" id="donetext0">0 đã làm</div>
+        <div class="bulk-actions">
+          <button class="bulk-btn" onclick="copyAllVisible(0)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="5" y="5" width="9" height="9" rx="1.5"/>
+              <path d="M3 11V3a2 2 0 0 1 2-2h8"/>
+            </svg>
+            Copy tất cả
+          </button>
+          <div class="done-count" id="donetext0">0 đã làm</div>
+        </div>
       </div>
       <div class="video-list" id="list0"></div>
     </div>
@@ -503,7 +586,16 @@
       <div class="tip-box"><b>Chiến lược:</b> Ra mắt format "Tôi phản bác [tên sách/chuyên gia]" — loại content gây tranh luận mạnh nhất, kéo cả fan lẫn anti-fan. Mỗi tuần có ít nhất 1 video react/phân tích tin tức tài chính nóng để bắt trend.</div>
       <div class="list-header">
         <div class="section-title" style="margin-bottom:0;flex:1">91 ý tưởng video</div>
-        <div class="done-count" id="donetext1">0 đã làm</div>
+        <div class="bulk-actions">
+          <button class="bulk-btn" onclick="copyAllVisible(1)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="5" y="5" width="9" height="9" rx="1.5"/>
+              <path d="M3 11V3a2 2 0 0 1 2-2h8"/>
+            </svg>
+            Copy tất cả
+          </button>
+          <div class="done-count" id="donetext1">0 đã làm</div>
+        </div>
       </div>
       <div class="video-list" id="list1"></div>
     </div>
@@ -529,7 +621,16 @@
       <div class="tip-box"><b>Chiến lược:</b> Bắt đầu "trend-jack" — khi có tin tức kinh tế lớn (vàng tăng, USD biến động, lãi suất thay đổi...) làm video phản bác góc nhìn chủ đạo trong vòng 12 giờ. Đây là nguồn view đột biến lớn nhất ở giai đoạn này.</div>
       <div class="list-header">
         <div class="section-title" style="margin-bottom:0;flex:1">91 ý tưởng video</div>
-        <div class="done-count" id="donetext2">0 đã làm</div>
+        <div class="bulk-actions">
+          <button class="bulk-btn" onclick="copyAllVisible(2)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="5" y="5" width="9" height="9" rx="1.5"/>
+              <path d="M3 11V3a2 2 0 0 1 2-2h8"/>
+            </svg>
+            Copy tất cả
+          </button>
+          <div class="done-count" id="donetext2">0 đã làm</div>
+        </div>
       </div>
       <div class="video-list" id="list2"></div>
     </div>
@@ -555,12 +656,23 @@
       <div class="tip-box"><b>Chiến lược:</b> Tạo 2–3 video "cornerstone" — hook cực mạnh, tiêu đề phản bác quan điểm mà hàng triệu người tin. Dồn toàn bộ effort vào thumbnail và 3 giây đầu. Một video viral ở giai đoạn này có thể kéo thêm 10–20K sub trong vài ngày.</div>
       <div class="list-header">
         <div class="section-title" style="margin-bottom:0;flex:1">92 ý tưởng video</div>
-        <div class="done-count" id="donetext3">0 đã làm</div>
+        <div class="bulk-actions">
+          <button class="bulk-btn" onclick="copyAllVisible(3)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="5" y="5" width="9" height="9" rx="1.5"/>
+              <path d="M3 11V3a2 2 0 0 1 2-2h8"/>
+            </svg>
+            Copy tất cả
+          </button>
+          <div class="done-count" id="donetext3">0 đã làm</div>
+        </div>
       </div>
       <div class="video-list" id="list3"></div>
     </div>
   </main>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 const colors = {
@@ -953,6 +1065,102 @@ function toggleDone(phaseIdx, vidIdx, el) {
   updateGlobals();
 }
 
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+function copyVideoText(phaseIdx, vidIdx, btn) {
+  const text = data[phaseIdx][vidIdx].t;
+  
+  // Try modern clipboard API first
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      showToast('✓ Đã copy ý tưởng!');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    }).catch(err => {
+      // Fallback to legacy method
+      fallbackCopy(text, btn);
+    });
+  } else {
+    // Use fallback directly
+    fallbackCopy(text, btn);
+  }
+}
+
+function copyAllVisible(phaseIdx) {
+  const filter = currentFilter;
+  const items = data[phaseIdx];
+  const filtered = items.filter(v => filter === 'all' || v.p === filter);
+  const text = filtered.map((v, i) => `${i + 1}. ${v.t}`).join('\n');
+  
+  // Try modern clipboard API first
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(`✓ Đã copy ${filtered.length} ý tưởng!`);
+    }).catch(err => {
+      fallbackCopyAll(text, filtered.length);
+    });
+  } else {
+    fallbackCopyAll(text, filtered.length);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  
+  try {
+    document.execCommand('copy');
+    btn.classList.add('copied');
+    showToast('✓ Đã copy ý tưởng!');
+    setTimeout(() => btn.classList.remove('copied'), 1500);
+  } catch (err) {
+    showToast('❌ Không thể copy. Vui lòng copy thủ công');
+  }
+  
+  document.body.removeChild(textarea);
+}
+
+function fallbackCopyAll(text, count) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  
+  try {
+    document.execCommand('copy');
+    showToast(`✓ Đã copy ${count} ý tưởng!`);
+  } catch (err) {
+    showToast('❌ Không thể copy. Vui lòng copy thủ công');
+  }
+  
+  document.body.removeChild(textarea);
+}
+
+function copyText(text, btn) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      showToast('✓ Đã copy!');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    }).catch(err => {
+      fallbackCopy(text, btn);
+    });
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
 function renderList(phaseIdx) {
   const filter = currentFilter;
   const list = document.getElementById('list' + phaseIdx);
@@ -972,6 +1180,12 @@ function renderList(phaseIdx) {
       <span class="vnum">${i + 1}</span>
       <div class="vtitle">${v.t}</div>
       <span class="vtag" style="background:${c.bg};border:1px solid ${c.border};color:${c.text}">${c.label}</span>
+      <button class="vcopy" onclick="event.stopPropagation();copyVideoText(${phaseIdx}, ${i}, this)" title="Copy ý tưởng">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="5" y="5" width="9" height="9" rx="1.5"/>
+          <path d="M3 11V3a2 2 0 0 1 2-2h8"/>
+        </svg>
+      </button>
     </div>`;
   });
   list.innerHTML = html;
