@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kế hoạch 365 Video Tài Chính</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f11;
+    --bg2: #18181c;
+    --bg3: #222228;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #f0efe8;
+    --text2: #9a9890;
+    --text3: #5c5b57;
+    --green: #4ade80;
+    --green-bg: rgba(74,222,128,0.1);
+    --green-border: rgba(74,222,128,0.25);
+    --amber: #f59e0b;
+    --amber-bg: rgba(245,158,11,0.1);
+    --amber-border: rgba(245,158,11,0.25);
+    --blue: #60a5fa;
+    --blue-bg: rgba(96,165,250,0.1);
+    --blue-border: rgba(96,165,250,0.25);
+    --pink: #f472b6;
+    --pink-bg: rgba(244,114,182,0.1);
+    --pink-border: rgba(244,114,182,0.25);
+    --radius: 10px;
+    --radius-lg: 14px;
+    --font: 'Be Vietnam Pro', sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding: 28px 32px 24px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .header-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .header-left p { font-size: 13px; color: var(--text2); }
+  .header-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .stat { text-align: right; }
+  .stat-val { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; }
+  .stat-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin-top: 1px; }
+  .stat-divider { width: 1px; height: 32px; background: var(--border2); }
+
+  /* ── MAIN LAYOUT ── */
+  .layout { display: flex; height: calc(100vh - 93px); }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--text3);
+    padding: 0 8px;
+    margin-bottom: 6px;
+    margin-top: 8px;
+  }
+  .sidebar-label:first-child { margin-top: 0; }
+  .phase-btn {
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    transition: all .15s;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .phase-btn:hover { background: var(--bg2); border-color: var(--border); }
+  .phase-btn.active { background: var(--bg3); border-color: var(--border2); }
+  .phase-btn-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .phase-btn-sub { font-size: 11px; color: var(--text3); }
+  .phase-btn.active .phase-btn-name { color: var(--text); }
+  .pb-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    display: inline-block; margin-right: 6px; margin-bottom: 1px;
+    vertical-align: middle;
+  }
+
+  .sidebar-filter-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--text3);
+    padding: 0 8px;
+    margin-bottom: 4px;
+    margin-top: 16px;
+  }
+  .filter-btn {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--text2);
+    font-family: var(--font);
+    transition: all .15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .filter-btn:hover { background: var(--bg2); color: var(--text); }
+  .filter-btn.on { background: var(--bg2); border-color: var(--border); color: var(--text); }
+  .filter-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .filter-count { margin-left: auto; font-size: 11px; color: var(--text3); }
+
+  .sidebar-progress { padding: 0 8px; margin-top: 20px; }
+  .progress-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .progress-bar { height: 3px; background: var(--bg3); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--green); border-radius: 999px; transition: width .3s; }
+
+  /* ── CONTENT ── */
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 28px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg3) transparent;
+  }
+  .content::-webkit-scrollbar { width: 5px; }
+  .content::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 999px; }
+
+  /* ── PHASE HEADER ── */
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .phase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .phase-title { font-size: 18px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; margin-bottom: 4px; }
+  .phase-sub { font-size: 13px; color: var(--text2); }
+  .phase-goals {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .goal-chip {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text2);
+  }
+  .phase-counter {
+    font-size: 13px;
+    color: var(--text2);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .phase-counter span { color: var(--text); font-weight: 600; }
+
+  /* ── WEEK SCHEDULE ── */
+  .week-section { margin-bottom: 20px; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--text3);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+  }
+  .week-day-label {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding-bottom: 4px;
+  }
+  .week-day-cell {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 8px 4px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text2);
+  }
+  .week-day-cell.t { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+  .week-day-cell.d { background: var(--amber-bg); border-color: var(--amber-border); color: var(--amber); }
+  .week-day-cell.c { background: var(--blue-bg); border-color: var(--blue-border); color: var(--blue); }
+
+  /* ── STRATEGY TIP ── */
+  .tip-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .tip-box b { color: var(--text); font-weight: 600; }
+
+  /* ── VIDEO LIST ── */
+  .list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .list-count { font-size: 12px; color: var(--text3); }
+  .done-count { font-size: 12px; color: var(--green); }
+
+  .video-list { display: flex; flex-direction: column; gap: 4px; }
+
+  .vcard {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    cursor: pointer;
+    transition: all .15s;
+    user-select: none;
+  }
+  .vcard:hover { border-color: var(--border2); background: var(--bg3); }
+  .vcard.done {
+    opacity: 0.45;
+    background: var(--bg);
+  }
+  .vcard.done .vtitle { text-decoration: line-through; }
+
+  .vcheck {
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s;
+    cursor: pointer;
+  }
+  .vcard.done .vcheck {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .vcheck-mark {
+    width: 8px; height: 8px;
+    opacity: 0;
+    transition: opacity .1s;
+  }
+  .vcard.done .vcheck-mark { opacity: 1; }
+
+  .vnum {
+    font-size: 11px;
+    color: var(--text3);
+    min-width: 22px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .vtitle {
+    font-size: 13px;
+    line-height: 1.5;
+    flex: 1;
+    color: var(--text);
+  }
+  .vtag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── PANE ── */
+  .pane { display: none; }
+  .pane.active { display: block; }
+
+  /* ── SCROLLBAR FIREFOX ── */
+  html { scrollbar-width: thin; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Kế hoạch 365 Video Tài Chính</h1>
+    <p>TikTok / YouTube Shorts · Tone phản bác · Chia đều 3 chủ đề</p>
+  </div>
+  <div class="header-stats">
+    <div class="stat">
+      <div class="stat-val">365</div>
+      <div class="stat-label">Tổng video</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-val">7/tuần</div>
+      <div class="stat-label">Tần suất</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-val">100K</div>
+      <div class="stat-label">Mục tiêu sub</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-val" id="global-done">0</div>
+      <div class="stat-label">Đã hoàn thành</div>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-label">Giai đoạn</div>
+
+    <button class="phase-btn active" onclick="switchPhase(0)">
+      <span class="phase-btn-name"><span class="pb-dot" style="background:#4ade80"></span>Giai đoạn 1</span>
+      <span class="phase-btn-sub">Tháng 1–3 · 91 video</span>
+    </button>
+    <button class="phase-btn" onclick="switchPhase(1)">
+      <span class="phase-btn-name"><span class="pb-dot" style="background:#60a5fa"></span>Giai đoạn 2</span>
+      <span class="phase-btn-sub">Tháng 4–6 · 91 video</span>
+    </button>
+    <button class="phase-btn" onclick="switchPhase(2)">
+      <span class="phase-btn-name"><span class="pb-dot" style="background:#f59e0b"></span>Giai đoạn 3</span>
+      <span class="phase-btn-sub">Tháng 7–9 · 91 video</span>
+    </button>
+    <button class="phase-btn" onclick="switchPhase(3)">
+      <span class="phase-btn-name"><span class="pb-dot" style="background:#f472b6"></span>Giai đoạn 4</span>
+      <span class="phase-btn-sub">Tháng 10–12 · 92 video</span>
+    </button>
+
+    <div class="sidebar-filter-label">Lọc chủ đề</div>
+    <button class="filter-btn on" id="fb-all" onclick="setFilter('all')">
+      <span class="filter-dot" style="background:var(--text3)"></span>
+      Tất cả
+      <span class="filter-count" id="fc-all">91</span>
+    </button>
+    <button class="filter-btn" id="fb-tamly" onclick="setFilter('tamly')">
+      <span class="filter-dot" style="background:#4ade80"></span>
+      Tâm lý tiền
+      <span class="filter-count" id="fc-tamly">31</span>
+    </button>
+    <button class="filter-btn" id="fb-dautu" onclick="setFilter('dautu')">
+      <span class="filter-dot" style="background:#f59e0b"></span>
+      Đầu tư
+      <span class="filter-count" id="fc-dautu">30</span>
+    </button>
+    <button class="filter-btn" id="fb-coban" onclick="setFilter('coban')">
+      <span class="filter-dot" style="background:#60a5fa"></span>
+      TC cơ bản
+      <span class="filter-count" id="fc-coban">30</span>
+    </button>
+
+    <div class="sidebar-progress">
+      <div class="progress-label">
+        <span>Tiến độ</span>
+        <span id="prog-label">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+    <!-- PHASE 1 -->
+    <div class="pane active" id="pane0">
+      <div class="phase-header">
+        <div>
+          <div class="phase-badge" style="background:var(--green-bg);border:1px solid var(--green-border);color:var(--green)">
+            <span style="width:5px;height:5px;background:var(--green);border-radius:50%;display:inline-block"></span>
+            Giai đoạn 1
+          </div>
+          <div class="phase-title">Nền tảng & thử nghiệm format phản bác</div>
+          <div class="phase-sub">Tháng 1–3 · Mục tiêu: 0 → 10K sub</div>
+          <div class="phase-goals">
+            <span class="goal-chip">Thử 3 format phản bác</span>
+            <span class="goal-chip">Tìm hook mạnh nhất</span>
+            <span class="goal-chip">Xây thói quen đăng đều</span>
+          </div>
+        </div>
+        <div class="phase-counter"><span id="done0">0</span>/91 xong</div>
+      </div>
+
+      <div class="week-section">
+        <div class="section-title">Lịch đăng mẫu trong tuần</div>
+        <div class="week-grid">
+          <div class="week-day-label">T2</div><div class="week-day-label">T3</div><div class="week-day-label">T4</div><div class="week-day-label">T5</div><div class="week-day-label">T6</div><div class="week-day-label">T7</div><div class="week-day-label">CN</div>
+          <div class="week-day-cell t">Tâm lý</div>
+          <div class="week-day-cell d">Đầu tư</div>
+          <div class="week-day-cell t">Tâm lý</div>
+          <div class="week-day-cell c">TC cơ bản</div>
+          <div class="week-day-cell d">Đầu tư</div>
+          <div class="week-day-cell c">TC cơ bản</div>
+          <div class="week-day-cell t">Tâm lý</div>
+        </div>
+      </div>
+
+      <div class="tip-box"><b>Chiến lược:</b> Mỗi video phải có câu phản bác rõ ràng ngay trong tiêu đề — dùng cấu trúc "Tại sao X là sai", "X không hoạt động như bạn nghĩ". Sau 30 video đầu, xem video nào vượt 20K view → đó là format thắng, nhân đôi vào tháng 2–3.</div>
+
+      <div class="list-header">
+        <div class="section-title" style="margin-bottom:0;flex:1">91 ý tưởng video</div>
+        <div class="done-count" id="donetext0">0 đã làm</div>
+      </div>
+      <div class="video-list" id="list0"></div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="pane" id="pane1">
+      <div class="phase-header">
+        <div>
+          <div class="phase-badge" style="background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue)">
+            <span style="width:5px;height:5px;background:var(--blue);border-radius:50%;display:inline-block"></span>
+            Giai đoạn 2
+          </div>
+          <div class="phase-title">Tăng tốc & xây dựng "thương hiệu phản bác"</div>
+          <div class="phase-sub">Tháng 4–6 · Mục tiêu: 10K → 35K sub</div>
+          <div class="phase-goals">
+            <span class="goal-chip">Series phản bác chuyên gia</span>
+            <span class="goal-chip">React video viral</span>
+            <span class="goal-chip">Collab cross-audience</span>
+          </div>
+        </div>
+        <div class="phase-counter"><span id="done1">0</span>/91 xong</div>
+      </div>
+      <div class="tip-box"><b>Chiến lược:</b> Ra mắt format "Tôi phản bác [tên sách/chuyên gia]" — loại content gây tranh luận mạnh nhất, kéo cả fan lẫn anti-fan. Mỗi tuần có ít nhất 1 video react/phân tích tin tức tài chính nóng để bắt trend.</div>
+      <div class="list-header">
+        <div class="section-title" style="margin-bottom:0;flex:1">91 ý tưởng video</div>
+        <div class="done-count" id="donetext1">0 đã làm</div>
+      </div>
+      <div class="video-list" id="list1"></div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="pane" id="pane2">
+      <div class="phase-header">
+        <div>
+          <div class="phase-badge" style="background:var(--amber-bg);border:1px solid var(--amber-border);color:var(--amber)">
+            <span style="width:5px;height:5px;background:var(--amber);border-radius:50%;display:inline-block"></span>
+            Giai đoạn 3
+          </div>
+          <div class="phase-title">Chuyên sâu & viral có chủ đích</div>
+          <div class="phase-sub">Tháng 7–9 · Mục tiêu: 35K → 70K sub</div>
+          <div class="phase-goals">
+            <span class="goal-chip">Debate quan điểm phổ biến</span>
+            <span class="goal-chip">Case thực tế Việt Nam</span>
+            <span class="goal-chip">Bắt trend tin tức kinh tế</span>
+          </div>
+        </div>
+        <div class="phase-counter"><span id="done2">0</span>/91 xong</div>
+      </div>
+      <div class="tip-box"><b>Chiến lược:</b> Bắt đầu "trend-jack" — khi có tin tức kinh tế lớn (vàng tăng, USD biến động, lãi suất thay đổi...) làm video phản bác góc nhìn chủ đạo trong vòng 12 giờ. Đây là nguồn view đột biến lớn nhất ở giai đoạn này.</div>
+      <div class="list-header">
+        <div class="section-title" style="margin-bottom:0;flex:1">91 ý tưởng video</div>
+        <div class="done-count" id="donetext2">0 đã làm</div>
+      </div>
+      <div class="video-list" id="list2"></div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="pane" id="pane3">
+      <div class="phase-header">
+        <div>
+          <div class="phase-badge" style="background:var(--pink-bg);border:1px solid var(--pink-border);color:var(--pink)">
+            <span style="width:5px;height:5px;background:var(--pink);border-radius:50%;display:inline-block"></span>
+            Giai đoạn 4
+          </div>
+          <div class="phase-title">Bứt phá 100K & monetize</div>
+          <div class="phase-sub">Tháng 10–12 · Mục tiêu: 70K → 100K+ sub</div>
+          <div class="phase-goals">
+            <span class="goal-chip">Video cornerstone viral</span>
+            <span class="goal-chip">Phản bác quan điểm đại chúng</span>
+            <span class="goal-chip">Ra mắt sản phẩm / khóa học</span>
+          </div>
+        </div>
+        <div class="phase-counter"><span id="done3">0</span>/92 xong</div>
+      </div>
+      <div class="tip-box"><b>Chiến lược:</b> Tạo 2–3 video "cornerstone" — hook cực mạnh, tiêu đề phản bác quan điểm mà hàng triệu người tin. Dồn toàn bộ effort vào thumbnail và 3 giây đầu. Một video viral ở giai đoạn này có thể kéo thêm 10–20K sub trong vài ngày.</div>
+      <div class="list-header">
+        <div class="section-title" style="margin-bottom:0;flex:1">92 ý tưởng video</div>
+        <div class="done-count" id="donetext3">0 đã làm</div>
+      </div>
+      <div class="video-list" id="list3"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+const colors = {
+  tamly: { bg:'rgba(74,222,128,0.12)', border:'rgba(74,222,128,0.25)', text:'#4ade80', label:'Tâm lý tiền' },
+  dautu: { bg:'rgba(245,158,11,0.12)', border:'rgba(245,158,11,0.25)', text:'#f59e0b', label:'Đầu tư' },
+  coban: { bg:'rgba(96,165,250,0.12)', border:'rgba(96,165,250,0.25)', text:'#60a5fa', label:'TC cơ bản' }
+};
+
+const data = [
+  [
+    {p:'tamly',t:'Tiết kiệm 10% lương KHÔNG bao giờ giúp bạn giàu — đây là lý do'},
+    {p:'tamly',t:'Tại sao người nghèo tiết kiệm còn người giàu thì không'},
+    {p:'tamly',t:'"Sống tiết kiệm để giàu" là lời khuyên tệ nhất thế kỷ'},
+    {p:'tamly',t:'Bạn không nghèo vì lười — bạn nghèo vì tư duy này'},
+    {p:'tamly',t:'Tại sao tăng lương nhưng không bao giờ có tiền dư'},
+    {p:'tamly',t:'Cái bẫy "tôi sẽ đầu tư khi có nhiều tiền hơn"'},
+    {p:'tamly',t:'Lifestyle inflation: kẻ thù vô hình của người có thu nhập tốt'},
+    {p:'tamly',t:'Tại sao người Việt sợ nói về tiền và hậu quả của nó'},
+    {p:'tamly',t:'"Tiền không mua được hạnh phúc" — câu nói của người chưa bao giờ thiếu tiền'},
+    {p:'tamly',t:'Sai lầm lớn nhất của người 20 tuổi với tiền bạc'},
+    {p:'tamly',t:'Tại sao bạn luôn cảm thấy "chưa đủ tiền" dù thu nhập tăng'},
+    {p:'tamly',t:'Tâm lý "được mua 1 tặng 1" đang khiến bạn tiêu nhiều hơn'},
+    {p:'tamly',t:'Tại sao bạn không thể dừng mua sắm online dù đã quyết tâm'},
+    {p:'tamly',t:'FOMO tài chính — kẻ thù lớn nhất của nhà đầu tư'},
+    {p:'tamly',t:'Tại sao đọc sách tài chính mà vẫn không giàu'},
+    {p:'tamly',t:'"Đợi đúng thời điểm" là lý do bạn mãi không bắt đầu đầu tư'},
+    {p:'tamly',t:'Hội chứng "một ngày nào đó" trong tài chính cá nhân'},
+    {p:'tamly',t:'Tại sao người hay nói về tiền thường lại ít tiền nhất'},
+    {p:'tamly',t:'Cái bẫy so sánh tài chính với bạn bè trên mạng xã hội'},
+    {p:'tamly',t:'Tại sao bạn cảm thấy tội lỗi khi tiêu tiền cho bản thân'},
+    {p:'tamly',t:'Mental accounting — cách não bộ tự lừa dối về tiền'},
+    {p:'tamly',t:'Tại sao người giàu càng giàu không phải vì họ thông minh hơn'},
+    {p:'tamly',t:'Sunk cost fallacy — tại sao bạn tiếp tục giữ cổ phiếu thua lỗ'},
+    {p:'tamly',t:'"An toàn là tốt nhất" — quan niệm đang khiến bạn nghèo đi'},
+    {p:'tamly',t:'Tại sao người giỏi tính toán lại hay ra quyết định tài chính tệ'},
+    {p:'tamly',t:'Overconfidence bias — cái bẫy của nhà đầu tư mới có lãi'},
+    {p:'tamly',t:'Tại sao bạn luôn underestimate chi phí sinh hoạt của mình'},
+    {p:'tamly',t:'Hedonic adaptation — tại sao mua đồ mới không bao giờ đủ'},
+    {p:'tamly',t:'Tại sao "kế hoạch tài chính hoàn hảo" không bao giờ hoạt động'},
+    {p:'tamly',t:'Scarcity mindset vs abundance mindset — cái nào đúng hơn?'},
+    {p:'tamly',t:'Tại sao người trẻ hay bị thao túng bởi các guru tài chính mạng'},
+    {p:'dautu',t:'Mua vàng để bảo toàn tài sản là lời khuyên lỗi thời'},
+    {p:'dautu',t:'Tại sao gửi tiết kiệm ngân hàng đang khiến bạn nghèo hơn mỗi năm'},
+    {p:'dautu',t:'Chứng khoán không rủi ro hơn gửi ngân hàng — nếu bạn hiểu điều này'},
+    {p:'dautu',t:'Tại sao cổ phiếu lẻ không bao giờ thắng được ETF về lâu dài'},
+    {p:'dautu',t:'Phân tích kỹ thuật có thực sự hoạt động hay chỉ là may mắn?'},
+    {p:'dautu',t:'Tại sao 90% trader thua lỗ — con số thật không ai muốn nhìn'},
+    {p:'dautu',t:'Crypto không phải đầu tư — đây là sự thật'},
+    {p:'dautu',t:'Tại sao bất động sản KHÔNG phải lúc nào cũng là kênh tốt nhất'},
+    {p:'dautu',t:'DCA không phải công thức thần kỳ — đây là giới hạn của nó'},
+    {p:'dautu',t:'Tại sao mua nhà để ở không phải "đầu tư" theo nghĩa thực sự'},
+    {p:'dautu',t:'Lợi nhuận 20%/năm mà ai cũng hứa hẹn — sự thật đằng sau'},
+    {p:'dautu',t:'Tại sao đa dạng hóa quá nhiều lại tệ hơn đầu tư tập trung'},
+    {p:'dautu',t:'Quỹ mở có thực sự tốt hơn tự đầu tư không?'},
+    {p:'dautu',t:'Tại sao stop-loss không cứu được bạn trong thị trường sideway'},
+    {p:'dautu',t:'Phân tích cơ bản vs phân tích kỹ thuật — cái nào vô dụng hơn?'},
+    {p:'dautu',t:'Tại sao Warren Buffett không phải hình mẫu cho nhà đầu tư nhỏ lẻ'},
+    {p:'dautu',t:'Lãi kép không phải "kỳ quan" nếu bạn bắt đầu quá muộn'},
+    {p:'dautu',t:'Tại sao copy portfolio của người giàu không bao giờ hiệu quả'},
+    {p:'dautu',t:'Insurance nhân thọ có thực sự là đầu tư hay không?'},
+    {p:'dautu',t:'Tại sao đầu tư theo "xu hướng" thường đến lúc đỉnh rồi mới mua'},
+    {p:'dautu',t:'P/E thấp không có nghĩa là cổ phiếu đang rẻ'},
+    {p:'dautu',t:'Tại sao thị trường không thể "timing" dù bạn thông minh đến đâu'},
+    {p:'dautu',t:'Margin trading — tại sao đây là cách nhanh nhất để mất tất cả'},
+    {p:'dautu',t:'Tại sao đọc báo tài chính hàng ngày không giúp bạn đầu tư tốt hơn'},
+    {p:'dautu',t:'IPO hype — tại sao hầu hết nhà đầu tư nhỏ đều thua'},
+    {p:'dautu',t:'Tại sao bán cổ phiếu khi lời 20% là sai lầm phổ biến nhất'},
+    {p:'dautu',t:'Bond (trái phiếu) không "an toàn" như bạn nghĩ'},
+    {p:'dautu',t:'Tại sao đầu tư theo khuyến nghị môi giới thường thất bại'},
+    {p:'dautu',t:'Thu nhập thụ động từ cổ tức — con số thật sau thuế và lạm phát'},
+    {p:'dautu',t:'Tại sao "mua và giữ mãi mãi" không phải chiến lược cho mọi người'},
+    {p:'coban',t:'Quy tắc 50/30/20 không hoạt động với người thu nhập thấp — đây là lý do'},
+    {p:'coban',t:'Tại sao quỹ khẩn cấp 6 tháng là lời khuyên sai cho hầu hết mọi người'},
+    {p:'coban',t:'Lập ngân sách không giúp bạn giàu — nó chỉ giúp bạn bớt nghèo'},
+    {p:'coban',t:'Tại sao "không có nợ" không phải mục tiêu tài chính tốt'},
+    {p:'coban',t:'Thẻ tín dụng không xấu — cách bạn dùng nó mới là vấn đề'},
+    {p:'coban',t:'Tại sao tiết kiệm tiền mặt trong 5 năm là quyết định tài chính tệ'},
+    {p:'coban',t:'Bảo hiểm nhân thọ — bạn đang trả tiền cho thứ gì?'},
+    {p:'coban',t:'Tại sao "mua nhà càng sớm càng tốt" là lời khuyên cần xem lại'},
+    {p:'coban',t:'Chi phí ẩn của việc sở hữu ô tô mà không ai tính cho bạn'},
+    {p:'coban',t:'Tại sao trả hết nợ thẻ tín dụng không phải lúc nào cũng ưu tiên số 1'},
+    {p:'coban',t:'Lạm phát đang "ăn" tiền của bạn nhanh hơn bạn kiếm được'},
+    {p:'coban',t:'Tại sao theo dõi chi tiêu hàng ngày là lãng phí thời gian'},
+    {p:'coban',t:'Sự thật về "tiết kiệm 1 tỷ để nghỉ hưu" ở Việt Nam'},
+    {p:'coban',t:'Tại sao mục tiêu tài chính theo năm thường thất bại'},
+    {p:'coban',t:'Pay yourself first nghe hay nhưng không hoạt động nếu thiếu điều này'},
+    {p:'coban',t:'Tại sao app quản lý chi tiêu không thay đổi được thói quen'},
+    {p:'coban',t:'Sự khác biệt giữa giá trị ròng và tiền mặt — điều hầu hết người bỏ qua'},
+    {p:'coban',t:'Tại sao mua đồ sale không phải tiết kiệm — đó là tiêu thêm'},
+    {p:'coban',t:'Hưu trí sớm FIRE — tại sao con số thường bị tính sai'},
+    {p:'coban',t:'Tại sao con số "cần bao nhiêu tiền để sống thoải mái" của bạn thường sai'},
+    {p:'coban',t:'Chi phí cơ hội — khái niệm quan trọng nhất trong tài chính mà trường không dạy'},
+    {p:'coban',t:'Tại sao "sống dưới khả năng" là lời khuyên đáng ngờ'},
+    {p:'coban',t:'Học phí đắt có thực sự đáng đầu tư không? Con số thật'},
+    {p:'coban',t:'Tại sao kế hoạch nghỉ hưu của bạn có thể đang thiếu 30%'},
+    {p:'coban',t:'Tính lương theo giờ — cách nhìn về tiền hoàn toàn thay đổi quyết định mua sắm'},
+    {p:'coban',t:'Tại sao "tiết kiệm để du lịch" không phải cách thông minh nhất'},
+    {p:'coban',t:'Thuế thu nhập cá nhân — lỗ hổng hợp pháp mà người Việt bỏ qua'},
+    {p:'coban',t:'Tại sao người có thu nhập 20 triệu thường tích lũy ít hơn người 10 triệu'},
+    {p:'coban',t:'Chi phí nuôi con thực sự ở Việt Nam — con số làm bạn sốc'},
+    {p:'coban',t:'Tại sao "đừng bao giờ đụng vào tiền tiết kiệm" là lời khuyên sai'},
+  ],
+  [
+    {p:'tamly',t:'Phản bác "Rich Dad Poor Dad" — 5 lời khuyên không áp dụng được ở Việt Nam'},
+    {p:'tamly',t:'Tại sao "think and grow rich" không làm giàu được ai'},
+    {p:'tamly',t:'Tôi đã thử sống như guru tài chính khuyên trong 30 ngày — kết quả thật'},
+    {p:'tamly',t:'Tại sao người kiếm ít lại thường hào phóng hơn người kiếm nhiều'},
+    {p:'tamly',t:'Anchoring bias — bẫy tâm lý khiến bạn nghĩ mình mua rẻ khi thực ra không phải'},
+    {p:'tamly',t:'Tại sao "làm theo đam mê" là lời khuyên nghề nghiệp tồi tệ'},
+    {p:'tamly',t:'Dunning-Kruger trong đầu tư — tại sao người mới hay tự tin nhất'},
+    {p:'tamly',t:'Tại sao người Việt hay giấu tài sản và hệ quả với quyết định tài chính'},
+    {p:'tamly',t:'Hội chứng mạng xã hội — tại sao thấy người giàu online khiến bạn quyết định tệ hơn'},
+    {p:'tamly',t:'Tại sao "học từ sai lầm" không phải cách học tài chính hiệu quả'},
+    {p:'tamly',t:'Illusion of control — tại sao bạn nghĩ mình kiểm soát được đầu tư'},
+    {p:'tamly',t:'Tại sao người hay nói "đầu tư vào bản thân" thường đang hợp lý hóa chi tiêu'},
+    {p:'tamly',t:'Hối tiếc tài chính lớn nhất của người 40 tuổi — khảo sát thực tế'},
+    {p:'tamly',t:'Tại sao "cẩn thận" trong tài chính đôi khi là quyết định rủi ro nhất'},
+    {p:'tamly',t:'Tại sao không nên hỏi người thân về tiền'},
+    {p:'tamly',t:'Cognitive dissonance tài chính — bạn biết sai nhưng vẫn làm'},
+    {p:'tamly',t:'Tại sao người giỏi học không đồng nghĩa với giỏi quản lý tiền'},
+    {p:'tamly',t:'Vì sao người trẻ ngày nay khó giàu hơn thế hệ cha mẹ — không phải vì lười'},
+    {p:'tamly',t:'Tại sao thói quen "nhỏ" không tạo nên sự giàu có — phản bác Atomic Habits'},
+    {p:'tamly',t:'Present bias — tại sao bạn luôn ưu tiên thỏa mãn ngay hơn tương lai'},
+    {p:'tamly',t:'Tại sao "sống tối giản" không giúp bạn giàu mà chỉ giúp bạn ít muốn hơn'},
+    {p:'tamly',t:'Tâm lý đám đông trong đầu tư — ai đang thao túng bạn thực sự?'},
+    {p:'tamly',t:'Tại sao người không bao giờ hài lòng về tài chính dù thu nhập tăng'},
+    {p:'tamly',t:'Tại sao so sánh tài chính với người cùng trang lứa là vô nghĩa'},
+    {p:'tamly',t:'Confirmation bias — tại sao bạn chỉ tìm thông tin đồng ý với quyết định đã có sẵn'},
+    {p:'tamly',t:'Tại sao người hay lo lắng về tiền thường quản lý tiền tốt hơn'},
+    {p:'tamly',t:'Recency bias — tại sao đầu tư theo thị trường gần đây luôn thất bại'},
+    {p:'tamly',t:'Tại sao "kỷ luật tài chính" không phải về ý chí mà về hệ thống'},
+    {p:'tamly',t:'Money dysmorphia — khi bạn giàu nhưng vẫn cảm thấy nghèo'},
+    {p:'tamly',t:'Tại sao cảm xúc khi thị trường xanh và đỏ là bình thường — và nguy hiểm'},
+    {p:'tamly',t:'Tại sao hầu hết mọi người định nghĩa "tự do tài chính" sai hoàn toàn'},
+    {p:'dautu',t:'Phân tích kỹ thuật — tại sao 80% tín hiệu là nhiễu'},
+    {p:'dautu',t:'Tại sao chuyên gia phân tích cổ phiếu không giàu hơn bạn'},
+    {p:'dautu',t:'Đầu tư theo tín hiệu Telegram/Zalo — phân tích thật sự đằng sau'},
+    {p:'dautu',t:'Tại sao đầu tư vào startup Việt Nam rủi ro cao hơn bạn nghĩ'},
+    {p:'dautu',t:'Phản bác khái niệm "đất không bao giờ mất giá"'},
+    {p:'dautu',t:'Tại sao yield 8% từ trái phiếu doanh nghiệp không phải "an toàn"'},
+    {p:'dautu',t:'Multi-level marketing núp bóng "đầu tư" — dấu hiệu nhận biết'},
+    {p:'dautu',t:'Tại sao chỉ số VN-Index không phản ánh thực tế nền kinh tế'},
+    {p:'dautu',t:'Short selling — công cụ của chuyên gia hay bẫy cho người mới?'},
+    {p:'dautu',t:'Tại sao cổ phiếu blue-chip không phải lúc nào cũng an toàn'},
+    {p:'dautu',t:'Tại sao mua ETF nước ngoài thông minh hơn ETF nội địa trong nhiều trường hợp'},
+    {p:'dautu',t:'Tại sao lợi nhuận "back-test" của chiến lược đầu tư thường là bịa đặt'},
+    {p:'dautu',t:'Tại sao càng đa dạng hóa nhiều kênh đầu tư bạn càng kiếm ít hơn'},
+    {p:'dautu',t:'Tại sao nắm giữ tiền mặt cũng là một quyết định đầu tư — và thường sai'},
+    {p:'dautu',t:'Bong bóng tài sản — làm sao biết mình đang ở đâu trong chu kỳ'},
+    {p:'dautu',t:'Tại sao "mua đáy bán đỉnh" là chiến lược của người không bao giờ thực hiện được'},
+    {p:'dautu',t:'Tại sao fund manager chuyên nghiệp thường không thắng được thị trường'},
+    {p:'dautu',t:'Phân tích tâm lý bầy đàn trong thị trường chứng khoán Việt Nam'},
+    {p:'dautu',t:'Tại sao đầu tư theo khuyến nghị báo tài chính thường vào muộn'},
+    {p:'dautu',t:'Leverage đầu tư bất động sản — khi nào thành bẫy thay vì đòn bẩy'},
+    {p:'dautu',t:'Tại sao ROI 30% của một dự án không phải lợi nhuận thực của bạn'},
+    {p:'dautu',t:'Tại sao "đầu tư dài hạn" của người Việt thường chỉ là 3–5 năm'},
+    {p:'dautu',t:'Tại sao góp vốn kinh doanh với bạn bè hầu như không bao giờ kết thúc tốt'},
+    {p:'dautu',t:'Tại sao cổ phiếu penny hút người mới và gần như luôn thất bại'},
+    {p:'dautu',t:'Tại sao thị trường không "hiệu quả" theo nghĩa sách giáo khoa'},
+    {p:'dautu',t:'Tại sao người đầu tư bất động sản giỏi thường thua ở chứng khoán'},
+    {p:'dautu',t:'Tại sao vàng SJC và vàng thế giới không thể so sánh trực tiếp'},
+    {p:'dautu',t:'Tại sao "thời gian trong thị trường" quan trọng hơn "timing thị trường" — nhưng không phải mọi lúc'},
+    {p:'coban',t:'Phản bác Dave Ramsey — tại sao lời khuyên của ông không hợp với người Việt'},
+    {p:'coban',t:'Tại sao "zero-based budgeting" nghe hay nhưng không ai làm được lâu dài'},
+    {p:'coban',t:'Tại sao mục tiêu FIRE ở Việt Nam cần tính lại hoàn toàn'},
+    {p:'coban',t:'Tại sao người có 2–3 nguồn thu nhập không nhất thiết giàu hơn người có 1'},
+    {p:'coban',t:'Tại sao không nên trả nợ theo thứ tự lãi suất cao nhất trước'},
+    {p:'coban',t:'Sự thật về "passive income" — tại sao gần như không gì là hoàn toàn thụ động'},
+    {p:'coban',t:'Tại sao chi phí nuôi con ở Việt Nam khiến FIRE trở nên gần như không thể'},
+    {p:'coban',t:'Nghỉ hưu sớm — tại sao nhiều người thực hiện FIRE rồi quay lại làm việc'},
+    {p:'coban',t:'Tại sao "sống dưới mức lương" cần ngưỡng tối thiểu mà không ai nói đến'},
+    {p:'coban',t:'Tại sao tư vấn tài chính được hoa hồng không bao giờ trung lập'},
+    {p:'coban',t:'Tại sao bảo hiểm xe máy bắt buộc là ví dụ về tài chính bất hợp lý nhất'},
+    {p:'coban',t:'Sự thật về lãi suất vay mua nhà — con số thật sau 20 năm'},
+    {p:'coban',t:'Tại sao "đầu tư vào giáo dục con" đôi khi là lý do để tiêu tiền'},
+    {p:'coban',t:'Tại sao người Việt hay bị bẫy bởi lãi suất theo tháng thay vì theo năm'},
+    {p:'coban',t:'Tại sao khoản tiền "nhỏ" chi hàng ngày quan trọng hơn khoản chi lớn hiếm gặp'},
+    {p:'coban',t:'Tại sao hầu hết người không biết net worth thật sự của mình là bao nhiêu'},
+    {p:'coban',t:'Sự thật về lãi suất thẻ tín dụng — tại sao bank không muốn bạn hiểu rõ'},
+    {p:'coban',t:'Tại sao tiết kiệm cho con học đại học không còn là khoản đầu tư chắc chắn'},
+    {p:'coban',t:'Tại sao "mua rẻ bán đắt" trong bất động sản khó hơn bất cứ ai nói'},
+    {p:'coban',t:'Chi phí sức khỏe tuổi già — con số mà kế hoạch nghỉ hưu của bạn đang bỏ sót'},
+  ],
+  [
+    {p:'tamly',t:'Tại sao "tư duy triệu phú" của các khóa học là pseudoscience'},
+    {p:'tamly',t:'Phản bác: "Người giàu không làm việc vì tiền" — thực tế hoàn toàn ngược'},
+    {p:'tamly',t:'Tại sao người hay chia sẻ triết lý tài chính thường đang bán khóa học'},
+    {p:'tamly',t:'Tại sao "không có gì là không thể" là câu nói nguy hiểm trong tài chính'},
+    {p:'tamly',t:'Phản bác: "Hãy trả tiền cho bản thân trước" — khi nào lời khuyên này phá sản?'},
+    {p:'tamly',t:'Tại sao hầu hết "success story" tài chính trên mạng có yếu tố may mắn bị ẩn đi'},
+    {p:'tamly',t:'Tại sao việc theo dõi giá vàng hàng ngày không giúp ích gì'},
+    {p:'tamly',t:'Tại sao người hay "chờ đợi thời cơ" thường bỏ lỡ cơ hội tốt nhất'},
+    {p:'tamly',t:'Tại sao tiền thưởng cuối năm hay bị tiêu hết nhanh hơn lương thường'},
+    {p:'tamly',t:'Mental accounting: tại sao "tiền thắng cờ bạc" bị tiêu khác "tiền lương"'},
+    {p:'tamly',t:'Tại sao người không có tiền lại hay cho người khác mượn tiền'},
+    {p:'tamly',t:'Tại sao "lo về tiền" thực ra là tốt — phản bác quan điểm chill về tài chính'},
+    {p:'tamly',t:'Tại sao việc nói chuyện về tiền với vợ/chồng quan trọng hơn bất cứ chiến lược đầu tư nào'},
+    {p:'tamly',t:'Tại sao bạo lực tài chính trong gia đình là vấn đề bị bỏ qua hoàn toàn'},
+    {p:'tamly',t:'Tại sao người có bằng kinh tế không nhất thiết quản lý tiền giỏi hơn'},
+    {p:'tamly',t:'Tại sao "tiền không thay đổi con người" là câu nói sai'},
+    {p:'tamly',t:'Tại sao quyết định tài chính lúc đói, mệt, stress thường tệ hơn 40%'},
+    {p:'tamly',t:'Tại sao người hay nói "tiền chỉ là công cụ" thường không có nhiều tiền'},
+    {p:'tamly',t:'Status goods — tại sao bạn mua đồ đắt tiền để người khác nhìn vào'},
+    {p:'tamly',t:'Tại sao sợ mất tiền (loss aversion) khiến bạn không bao giờ giàu được'},
+    {p:'tamly',t:'Tại sao "đừng bao giờ đầu tư tiền mà bạn không thể mất" là lời khuyên tự mâu thuẫn'},
+    {p:'tamly',t:'Tại sao người thường xuyên "restart" kế hoạch tài chính không bao giờ tiến triển'},
+    {p:'tamly',t:'Tại sao "suy nghĩ tích cực về tiền" không phải giải pháp tài chính'},
+    {p:'tamly',t:'Tại sao tự thưởng sau khi tiết kiệm là cơ chế phá hoại thói quen'},
+    {p:'tamly',t:'Tại sao không có "số tiền đủ để hạnh phúc" — nhưng có ngưỡng'},
+    {p:'tamly',t:'Tại sao người hay bị lừa đảo tài chính không phải vì họ ngu'},
+    {p:'tamly',t:'Tại sao người Việt hay mua vé số — phân tích hành vi không phán xét'},
+    {p:'tamly',t:'Tại sao kết hôn là quyết định tài chính lớn nhất bạn đưa ra'},
+    {p:'tamly',t:'Tại sao "bình tĩnh" trước biến động thị trường thực ra không phải đức tính tốt'},
+    {p:'tamly',t:'Tại sao con người giỏi hợp lý hóa quyết định mua sắm sai'},
+    {p:'tamly',t:'Tại sao người cực kỳ tiết kiệm đôi khi có quyết định tài chính tệ hơn người tiêu thoải mái'},
+    {p:'dautu',t:'Phân tích: tại sao thị trường chứng khoán Việt Nam 2023–2024 không phản ánh kinh tế thực'},
+    {p:'dautu',t:'Tại sao "smart money" không thông minh như bạn nghĩ'},
+    {p:'dautu',t:'Tại sao room ngoại trong cổ phiếu tạo ra bất bình đẳng với nhà đầu tư nhỏ lẻ'},
+    {p:'dautu',t:'Tại sao nâng hạng thị trường chứng khoán không hẳn tốt cho nhà đầu tư nhỏ'},
+    {p:'dautu',t:'Tại sao index investing không phải "không có rủi ro"'},
+    {p:'dautu',t:'Phân tích: bẫy yield cao của trái phiếu doanh nghiệp Việt Nam'},
+    {p:'dautu',t:'Tại sao đầu tư bất động sản ven đô đang bắt đầu rủi ro hơn'},
+    {p:'dautu',t:'Tại sao "mua và quên" không phải chiến lược — đó là sự lười biếng có hại'},
+    {p:'dautu',t:'Phân tích thực tế: ai thực sự kiếm tiền trong cơn sốt đất?'},
+    {p:'dautu',t:'Tại sao cổ tức tiền mặt không phải lợi nhuận thực sự'},
+    {p:'dautu',t:'Tại sao đầu tư theo "insider" tại Việt Nam nguy hiểm hơn nhiều nước khác'},
+    {p:'dautu',t:'Tại sao người Việt hay bị thu hút bởi đầu tư nước ngoài mà thiếu thông tin'},
+    {p:'dautu',t:'Tại sao lãi suất Fed tăng ảnh hưởng đến túi tiền bạn ở Việt Nam'},
+    {p:'dautu',t:'Tại sao đầu tư theo chu kỳ kinh tế khó hơn nhiều so với lý thuyết'},
+    {p:'dautu',t:'Tại sao người ta thường mua nhà khi thị trường đỉnh và bán khi đáy'},
+    {p:'dautu',t:'Tại sao "đầu tư an toàn 100%" không tồn tại — phân tích từng loại tài sản'},
+    {p:'dautu',t:'Tại sao lợi nhuận quá khứ của quỹ đầu tư không dự báo được tương lai'},
+    {p:'dautu',t:'Tại sao người giỏi phân tích tài chính vẫn thua thị trường'},
+    {p:'dautu',t:'Tại sao đầu tư vào bản thân đôi khi là lý do trì hoãn đầu tư tài chính'},
+    {p:'dautu',t:'Tại sao NFT và crypto 2021 là bài học tâm lý bầy đàn hoàn hảo'},
+    {p:'dautu',t:'Tại sao quản lý rủi ro quan trọng hơn tìm cơ hội lợi nhuận'},
+    {p:'dautu',t:'Phân tích: chu kỳ bất động sản Việt Nam và lần này có khác không?'},
+    {p:'dautu',t:'Tại sao người giàu đa dạng hóa theo cách khác hoàn toàn người nghĩ'},
+    {p:'dautu',t:'Tại sao "đất nền" không còn là kênh đầu tư dễ ăn như 10 năm trước'},
+    {p:'dautu',t:'Tại sao chứng chỉ quỹ mở thường tệ hơn bạn tự đầu tư ETF'},
+    {p:'dautu',t:'Tại sao rủi ro tỷ giá bị hầu hết nhà đầu tư Việt bỏ qua hoàn toàn'},
+    {p:'dautu',t:'Tại sao thị trường tốt không có nghĩa là bạn đầu tư đúng'},
+    {p:'dautu',t:'Tại sao "patience" trong đầu tư không phải chỉ là chờ đợi'},
+    {p:'dautu',t:'Phân tích: bài học từ nhà đầu tư cá nhân thua lỗ trong giai đoạn 2022'},
+    {p:'coban',t:'Tại sao "hãy tăng thu nhập thay vì cắt chi" đúng nhưng không đủ'},
+    {p:'coban',t:'Tại sao freelance không phải lúc nào cũng tốt hơn đi làm thuê về tài chính'},
+    {p:'coban',t:'Tại sao chạy side hustle khi chưa ổn định việc chính là sai lầm'},
+    {p:'coban',t:'Sự thật về thu nhập của creator tài chính trên YouTube/TikTok Việt Nam'},
+    {p:'coban',t:'Tại sao phúc lợi công ty (BHXH, bảo hiểm y tế) quan trọng hơn lương gross'},
+    {p:'coban',t:'Tại sao tăng lương 10% không bằng giảm thuế 5% — tính toán thực tế'},
+    {p:'coban',t:'Tại sao "đàm phán lương" là kỹ năng tài chính quan trọng nhất mà trường không dạy'},
+    {p:'coban',t:'Tại sao người tự kinh doanh thường tính lợi nhuận sai hoàn toàn'},
+    {p:'coban',t:'Tại sao chi phí cơ hội của việc ở nhà thuê vs mua thường bị tính sai'},
+    {p:'coban',t:'Tại sao "tiết kiệm trước tết" là thách thức tâm lý — không phải tài chính'},
+    {p:'coban',t:'Tại sao lạm phát y tế đang hủy hoại kế hoạch nghỉ hưu của người Việt'},
+    {p:'coban',t:'Tại sao người hay nói "đầu tư vào mối quan hệ" đang bỏ qua đầu tư thực'},
+    {p:'coban',t:'Sự thật về thu nhập thụ động từ cho thuê nhà — sau khi tính đủ chi phí'},
+    {p:'coban',t:'Tại sao "làm việc chăm chỉ" không còn là con đường tối ưu để giàu có'},
+    {p:'coban',t:'Tại sao người lương cao nhất thường không phải người tiết kiệm nhiều nhất'},
+    {p:'coban',t:'Tại sao tiết kiệm theo tỷ lệ % tốt hơn theo số tiền cố định'},
+    {p:'coban',t:'Tại sao không phải lúc nào cũng nên dùng hết hạn mức thẻ tín dụng dù miễn lãi'},
+    {p:'coban',t:'Sự thật về "thu nhập 6 con số" — tại sao nhiều người vẫn sống paycheck to paycheck'},
+    {p:'coban',t:'Tại sao mức lương "đủ sống" ở TP.HCM và Hà Nội không còn như 5 năm trước'},
+    {p:'coban',t:'Tại sao người hay tham gia hội hụi (họ) đang thực sự làm gì với tiền của mình'},
+  ],
+  [
+    {p:'tamly',t:'Tại sao "tự do tài chính" là khái niệm bị bán cho bạn — không phải mục tiêu thực'},
+    {p:'tamly',t:'Phản bác: "Hãy sống như không có ngày mai" về tài chính'},
+    {p:'tamly',t:'Tại sao người thành công nhất tài chính thường không hạnh phúc nhất'},
+    {p:'tamly',t:'Tại sao "giàu có là kết quả của tư duy" là nửa sự thật nguy hiểm'},
+    {p:'tamly',t:'Tại sao việc so sánh mức giàu của mình với người khác là tự hủy'},
+    {p:'tamly',t:'Tại sao tiền không giải quyết được vấn đề tiền — nếu tư duy không thay đổi'},
+    {p:'tamly',t:'Tại sao "đủ rồi" là khái niệm tài chính quan trọng nhất ít ai nói đến'},
+    {p:'tamly',t:'Phản bác: tại sao không phải ai cũng nên đặt mục tiêu trở thành triệu phú'},
+    {p:'tamly',t:'Tại sao người cực kỳ giỏi kiếm tiền đôi khi là người tệ nhất về chi tiêu'},
+    {p:'tamly',t:'Tại sao sợ về hưu là vấn đề tâm lý, không phải tài chính'},
+    {p:'tamly',t:'Tại sao người trẻ bây giờ cần tư duy tài chính khác hoàn toàn thế hệ trước'},
+    {p:'tamly',t:'Tại sao đỉnh điểm của kỷ luật tài chính là không cần kỷ luật nữa'},
+    {p:'tamly',t:'Tại sao "không bao giờ đủ" trong tài chính là dấu hiệu cần chú ý'},
+    {p:'tamly',t:'Tại sao người hay phán xét cách người khác tiêu tiền thường không giỏi hơn'},
+    {p:'tamly',t:'Tại sao hầu hết "bài học tài chính từ người giàu" không áp dụng được cho bạn'},
+    {p:'tamly',t:'Tại sao AI sẽ không giúp bạn đầu tư tốt hơn nếu thiếu nền tảng tâm lý'},
+    {p:'tamly',t:'Tại sao "im lặng về tiền" là chiến lược bảo vệ tài sản thông minh nhất'},
+    {p:'tamly',t:'Tại sao người hay thử các chiến lược tài chính mới thường thất bại'},
+    {p:'tamly',t:'Tại sao sự chán nản là kẻ thù lớn nhất của nhà đầu tư dài hạn'},
+    {p:'tamly',t:'Tại sao mỗi quyết định chi tiêu là một phiếu bầu cho cuộc sống bạn muốn'},
+    {p:'tamly',t:'Phản bác: "Tiền mua được tất cả ngoại trừ hạnh phúc" — sai ở đâu?'},
+    {p:'tamly',t:'Tại sao người hay nói "tôi không quan tâm đến tiền" thực ra rất quan tâm'},
+    {p:'tamly',t:'Tại sao quyết định tài chính lớn nhất bạn đưa ra không phải là đầu tư nào'},
+    {p:'tamly',t:'Tại sao thành công tài chính của bạn phụ thuộc nhiều vào ai bạn kết hôn'},
+    {p:'tamly',t:'Tại sao người giàu nghĩ về rủi ro khác hoàn toàn người thường'},
+    {p:'tamly',t:'Phản bác lại bản thân: điều gì tôi từng tin về tiền mà nay biết là sai'},
+    {p:'tamly',t:'Tại sao "đủ can đảm để nghỉ việc" không phải lúc nào cũng là dũng cảm tài chính'},
+    {p:'tamly',t:'Tại sao người hay đưa ra lời khuyên tài chính miễn phí thường không giàu'},
+    {p:'tamly',t:'Tại sao cảm giác "an toàn tài chính" quan trọng hơn số tiền trong tài khoản'},
+    {p:'tamly',t:'Tại sao hệ thống tài chính được thiết kế để người bình thường khó giàu'},
+    {p:'tamly',t:'1 năm xây kênh tài chính: điều tôi học được về tiền từ chính khán giả'},
+    {p:'dautu',t:'Tại sao thị trường bull không chứng minh bạn đầu tư giỏi'},
+    {p:'dautu',t:'Phân tích: ai thực sự thắng trong thị trường gấu — con số thật'},
+    {p:'dautu',t:'Tại sao "giữ cổ phiếu qua lỗ" đúng trong một số trường hợp và sai trong phần còn lại'},
+    {p:'dautu',t:'Tại sao sắp tới là thời điểm tốt hay xấu để đầu tư — phân tích theo chu kỳ'},
+    {p:'dautu',t:'Tại sao câu hỏi "nên mua gì" không phải câu hỏi quan trọng nhất'},
+    {p:'dautu',t:'Tại sao nhà đầu tư tổ chức không giỏi hơn bạn — họ chỉ có nhiều tiền hơn'},
+    {p:'dautu',t:'Tại sao không có danh mục đầu tư nào "tối ưu" cho mọi người'},
+    {p:'dautu',t:'Tại sao người đầu tư giỏi nhất thường là người nhàm chán nhất'},
+    {p:'dautu',t:'Tại sao bạn nên lo khi thấy quảng cáo đầu tư ở khắp nơi'},
+    {p:'dautu',t:'Phân tích: 5 sai lầm đầu tư phổ biến nhất của người Việt — dữ liệu thực'},
+    {p:'dautu',t:'Tại sao cách tính lợi nhuận của hầu hết nhà đầu tư cá nhân là sai'},
+    {p:'dautu',t:'Tại sao "thị trường luôn phục hồi" đúng nhưng không có nghĩa với bạn'},
+    {p:'dautu',t:'Tại sao người mới đầu tư năm 2024 đang ở vị thế khó hơn nhiều so với 2015'},
+    {p:'dautu',t:'Tại sao tái cân bằng danh mục là điều quan trọng mà ít ai làm đúng'},
+    {p:'dautu',t:'Tại sao exit strategy quan trọng hơn entry trong đầu tư'},
+    {p:'dautu',t:'Tại sao thất bại đầu tư đầu tiên thường là bài học tốt nhất — nếu không quá lớn'},
+    {p:'dautu',t:'Tại sao người đầu tư theo "value investing" tại Việt Nam gặp thách thức khác thế giới'},
+    {p:'dautu',t:'Tại sao câu hỏi "đầu tư cái gì" kém quan trọng hơn "đầu tư bao nhiêu % thu nhập"'},
+    {p:'dautu',t:'Tại sao "đầu tư không cần biết nhiều" — đúng hay sai?'},
+    {p:'dautu',t:'Tại sao lãi suất tiết kiệm thực âm là bình thường và cần làm gì'},
+    {p:'dautu',t:'Phân tích: chiến lược đầu tư nào thực sự phù hợp với người Việt thu nhập trung bình'},
+    {p:'dautu',t:'Tại sao đầu tư vào chỉ số toàn cầu khôn ngoan hơn chỉ đầu tư trong nước'},
+    {p:'dautu',t:'Tại sao "tôi sẽ bắt đầu đầu tư khi thị trường ổn định" là câu nói vô nghĩa'},
+    {p:'dautu',t:'Tại sao người đầu tư thành công nhất thường không biết lý do mình thành công'},
+    {p:'dautu',t:'Phân tích case: nhà đầu tư Việt nào thực sự giàu lên nhờ chứng khoán?'},
+    {p:'dautu',t:'Tại sao "đầu tư vào con người" quan trọng nhưng không thể thay thế đầu tư tài chính'},
+    {p:'dautu',t:'Tại sao 2025 là năm thử thách lớn với nhà đầu tư bất động sản Việt Nam'},
+    {p:'dautu',t:'Tại sao volatility không phải rủi ro — đây là sự khác biệt quan trọng nhất'},
+    {p:'dautu',t:'Tại sao người thích đọc bảng giá mỗi ngày thường đầu tư kém hơn'},
+    {p:'dautu',t:'Kết luận: loại tài sản nào tôi tin là phù hợp với đa số người Việt — lý do thật'},
+    {p:'coban',t:'Tại sao định nghĩa "giàu" cần được thiết lập lại cho người Việt trẻ'},
+    {p:'coban',t:'Sự thật về thu nhập trung bình và tại sao bạn không nên so sánh với nó'},
+    {p:'coban',t:'Tại sao "không có nợ xấu" không đồng nghĩa với tài chính lành mạnh'},
+    {p:'coban',t:'Tại sao kế hoạch tài chính 5 năm thường thất bại sau 18 tháng'},
+    {p:'coban',t:'Tại sao người hay nói về tiền trên mạng thường không phải người giàu nhất'},
+    {p:'coban',t:'Tại sao "sống cho hiện tại" và "tiết kiệm cho tương lai" không phải mâu thuẫn'},
+    {p:'coban',t:'Tại sao người không có mục tiêu tài chính cụ thể thường làm việc đến 65 tuổi'},
+    {p:'coban',t:'Tại sao tỷ lệ tiết kiệm quan trọng hơn số tiền tiết kiệm tuyệt đối'},
+    {p:'coban',t:'Tại sao học về tài chính cá nhân nhưng không hành động là tệ hơn không biết'},
+    {p:'coban',t:'Tại sao "bảo vệ tài sản" quan trọng không kém "tạo ra tài sản"'},
+    {p:'coban',t:'Tại sao người trẻ Việt Nam đang phải đối mặt với thử thách tài chính chưa từng có'},
+    {p:'coban',t:'Tại sao câu hỏi "bao nhiêu tiền là đủ" cần được trả lời trước khi đầu tư'},
+    {p:'coban',t:'Tại sao "thành thật với chi tiêu của bản thân" là bước đầu tiên — không phải lập ngân sách'},
+    {p:'coban',t:'Tại sao người hay nói "tôi nghèo vì hoàn cảnh" đúng một phần — và sai một phần'},
+    {p:'coban',t:'Tại sao người biết nhiều về tài chính vẫn đưa ra quyết định tệ'},
+    {p:'coban',t:'Tại sao "không có đường tắt" đến tự do tài chính — nhưng có đường nhanh hơn'},
+    {p:'coban',t:'Tại sao người hay restart tài chính cần thay đổi hệ thống, không phải kỷ luật'},
+    {p:'coban',t:'Tại sao hệ thống tài chính cá nhân tốt nhất là cái bạn thực sự duy trì được'},
+    {p:'coban',t:'Tại sao "một năm sau" tài chính của bạn phụ thuộc vào quyết định tuần này'},
+    {p:'coban',t:'Nhìn lại 1 năm — điều gì tôi đã sai về tài chính và thay đổi quan điểm'},
+    {p:'coban',t:'Tại sao người xem kênh tài chính nhưng không hành động đang tự hại mình'},
+  ]
+];
+
+const TOTAL = 365;
+let currentPhase = 0;
+let currentFilter = 'all';
+const doneState = JSON.parse(localStorage.getItem('done365') || '{}');
+
+function saveState() {
+  localStorage.setItem('done365', JSON.stringify(doneState));
+}
+
+function getTotalDone() {
+  return Object.values(doneState).filter(Boolean).length;
+}
+
+function getPhaseDone(phaseIdx) {
+  return data[phaseIdx].filter((_, i) => doneState[phaseIdx + '_' + i]).length;
+}
+
+function updateGlobals() {
+  const done = getTotalDone();
+  document.getElementById('global-done').textContent = done;
+  const pct = Math.round(done / TOTAL * 100);
+  document.getElementById('prog-label').textContent = pct + '%';
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+
+function updatePhaseDone(phaseIdx) {
+  const done = getPhaseDone(phaseIdx);
+  const totals = [91, 91, 91, 92];
+  document.getElementById('done' + phaseIdx).textContent = done;
+  document.getElementById('donetext' + phaseIdx).textContent = done + ' đã làm';
+}
+
+function toggleDone(phaseIdx, vidIdx, el) {
+  const key = phaseIdx + '_' + vidIdx;
+  doneState[key] = !doneState[key];
+  saveState();
+  el.closest('.vcard').classList.toggle('done', doneState[key]);
+  updatePhaseDone(phaseIdx);
+  updateGlobals();
+}
+
+function renderList(phaseIdx) {
+  const filter = currentFilter;
+  const list = document.getElementById('list' + phaseIdx);
+  const items = data[phaseIdx];
+  let html = '';
+  items.forEach((v, i) => {
+    if (filter !== 'all' && v.p !== filter) return;
+    const c = colors[v.p];
+    const key = phaseIdx + '_' + i;
+    const done = doneState[key] ? 'done' : '';
+    html += `<div class="vcard ${done}" data-phase="${phaseIdx}" data-idx="${i}">
+      <div class="vcheck" onclick="event.stopPropagation();toggleDone(${phaseIdx},${i},this)">
+        <svg class="vcheck-mark" viewBox="0 0 8 8" fill="none">
+          <path d="M1.5 4L3.5 6L6.5 2" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="vnum">${i + 1}</span>
+      <div class="vtitle">${v.t}</div>
+      <span class="vtag" style="background:${c.bg};border:1px solid ${c.border};color:${c.text}">${c.label}</span>
+    </div>`;
+  });
+  list.innerHTML = html;
+  updatePhaseDone(phaseIdx);
+}
+
+function setFilter(type) {
+  currentFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById('fb-' + (type === 'dautu' ? 'dautu' : type)).classList.add('on');
+  renderList(currentPhase);
+  updateFilterCounts();
+}
+
+function updateFilterCounts() {
+  const items = data[currentPhase];
+  document.getElementById('fc-all').textContent = items.length;
+  document.getElementById('fc-tamly').textContent = items.filter(v => v.p === 'tamly').length;
+  document.getElementById('fc-dautu').textContent = items.filter(v => v.p === 'dautu').length;
+  document.getElementById('fc-coban').textContent = items.filter(v => v.p === 'coban').length;
+}
+
+function switchPhase(idx) {
+  currentPhase = idx;
+  document.querySelectorAll('.pane').forEach((p, i) => p.classList.toggle('active', i === idx));
+  document.querySelectorAll('.phase-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+  currentFilter = 'all';
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById('fb-all').classList.add('on');
+  renderList(idx);
+  updateFilterCounts();
+}
+
+renderList(0); renderList(1); renderList(2); renderList(3);
+updateFilterCounts();
+updateGlobals();
+</script>
+</body>
+</html>
