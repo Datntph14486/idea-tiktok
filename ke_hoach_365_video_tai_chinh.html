@@ -1073,7 +1073,8 @@ function showToast(msg) {
 }
 
 function copyVideoText(phaseIdx, vidIdx, btn) {
-  const text = data[phaseIdx][vidIdx].t;
+  const originalText = data[phaseIdx][vidIdx].t;
+  const text = `Viết script TikTok về ${originalText}`;
   
   // Try modern clipboard API first
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1095,7 +1096,7 @@ function copyAllVisible(phaseIdx) {
   const filter = currentFilter;
   const items = data[phaseIdx];
   const filtered = items.filter(v => filter === 'all' || v.p === filter);
-  const text = filtered.map((v, i) => `${i + 1}. ${v.t}`).join('\n');
+  const text = filtered.map((v, i) => `${i + 1}. Viết script TikTok về ${v.t}`).join('\n\n');
   
   // Try modern clipboard API first
   if (navigator.clipboard && navigator.clipboard.writeText) {
